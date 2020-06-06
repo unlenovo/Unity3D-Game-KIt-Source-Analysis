@@ -5,21 +5,21 @@ using UnityEngine;
 namespace Gamekit3D.Cameras
 {
     /// <summary>
-    /// A class that mimic's the Unity Editor camera.
+    /// A class that mimic's the Unity Editor camera.一个模仿统一编辑器相机的类。
     /// </summary>
     public class EditorCamera : MonoBehaviour
     {
-        public Vector3 velocity;
-        public Vector3 angles;
+        public Vector3 velocity;//速度
+        public Vector3 angles;//角度
 
-        Vector3 mousePosition;
-        Vector3 mouseDelta;
-        Quaternion originRotation;
+        Vector3 mousePosition;//鼠标的位置
+        Vector3 mouseDelta;//鼠标的增量
+        Quaternion originRotation;//四元数
 
         void Start()
         {
-            mousePosition = Input.mousePosition;
-            originRotation = transform.localRotation;
+            mousePosition = Input.mousePosition;//输入鼠标的位置
+            originRotation = transform.localRotation;//局部旋转//该变换的旋转角度相对于父级变换的旋转角度//需要用到四元数
         }
 
         void Update()
