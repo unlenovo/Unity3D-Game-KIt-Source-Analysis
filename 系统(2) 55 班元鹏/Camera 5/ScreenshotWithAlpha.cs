@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.IO;
+using System.IO;//C# System.IO文件操作整理
 using System;
-using System.Linq;
-using System.Collections.Generic;
+using System.Linq;//System.Linq 命名空间提供支持使用语言集成查询 (LINQ) 进行查询的类和接口。
+using System.Collections.Generic;//System.Collections.Generic 命名空间包含定义泛型集合的接口和类，用户可以使用泛型集合来创建强类型集合，这种集合能提供比非泛型强类型集合更好的类型安全性和性能。
 
 namespace Gamekit3D
 {
@@ -15,19 +15,19 @@ namespace Gamekit3D
         Texture2D Screenshot()
         {
             var camera = GetComponent<Camera>();
-            int w = camera.pixelWidth * UpScale;
-            int h = camera.pixelHeight * UpScale;
-            var rt = new RenderTexture(w, h, 32);
-            camera.targetTexture = rt;
-            var screenShot = new Texture2D(w, h, TextureFormat.ARGB32, false);
-            var clearFlags = camera.clearFlags;
-            if (AlphaBackground)
+            int w = camera.pixelWidth * UpScale;//相机的宽度
+            int h = camera.pixelHeight * UpScale;//相机的高度
+            var rt = new RenderTexture(w, h, 32);//RenderTexture是可以被渲染的纹理。
+            camera.targetTexture = rt;//描述渲染纹理
+            var screenShot = new Texture2D(w, h, TextureFormat.ARGB32, false);//Texture2D 二维纹理
+            var clearFlags = camera.clearFlags;//Camera.clearFlags 清除标识(可理解为背景填充)
+            if (AlphaBackground)//字母背景
             {
-                camera.clearFlags = CameraClearFlags.SolidColor;
-                camera.backgroundColor = new Color(0, 0, 0, 0);
+                camera.clearFlags = CameraClearFlags.SolidColor;//CameraClearFlags.SolidColor（用单色填充背景）, 
+                camera.backgroundColor = new Color(0, 0, 0, 0);//Camera.backgroundColor 背景颜色
             }
-            var cameras = new List<Camera>(FindObjectsOfType<Camera>());
-            cameras.Sort((A, B) => A.depth.CompareTo(B.depth));
+            var cameras = new List<Camera>(FindObjectsOfType<Camera>());//？？？？
+            cameras.Sort((A, B) => A.depth.CompareTo(B.depth));//？？
             foreach (var c in cameras) c.Render();
             RenderTexture.active = rt;
             screenShot.ReadPixels(new Rect(0, 0, w, h), 0, 0);
